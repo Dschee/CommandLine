@@ -29,16 +29,9 @@ internal extension String {
   fileprivate func _localDecimalPoint() -> Character {
     let locale = localeconv()
     if locale != nil {
-      #if swift(>=3.0)
-        if let decimalPoint = locale?.pointee.decimal_point {
-          return Character(UnicodeScalar(UInt32(decimalPoint.pointee))!)
-        }
-      #else
-        let decimalPoint = locale.pointee.decimal_point
-        if decimalPoint != nil {
-          return Character(UnicodeScalar(UInt32(decimalPoint.pointee)))
-        }
-      #endif
+      if let decimalPoint = locale?.pointee.decimal_point {
+        return Character(UnicodeScalar(UInt32(decimalPoint.pointee))!)
+      }
     }
 
     return "."
@@ -56,11 +49,7 @@ internal extension String {
     var isNegative: Bool = false
     let decimalPoint = self._localDecimalPoint()
 
-    #if swift(>=3.0)
-      let charactersEnumerator = self.characters.enumerated()
-    #else
-      let charactersEnumerator = self.characters.enumerated()
-    #endif
+    let charactersEnumerator = self.enumerated()
     for (i, c) in charactersEnumerator {
       if i == 0 && c == "-" {
         isNegative = true
@@ -86,11 +75,10 @@ internal extension String {
 
     let doubleCharacteristic = Double(Int(characteristic)!)
     return (doubleCharacteristic +
-      Double(Int(mantissa)!) / pow(Double(10), Double(mantissa.characters.count - 1))) *
+      Double(Int(mantissa)!) / pow(Double(10), Double(mantissa.count - 1))) *
       (isNegative ? -1 : 1)
   }
 
-  #if swift(>=3.0)
   /**
    * Splits a string into an array of string components.
    *
@@ -104,54 +92,21 @@ internal extension String {
     var numSplits = 0
 
     var curIdx = self.startIndex
-    for i in self.characters.indices {
+    for i in self.indices {
       let c = self[i]
       if c == by && (maxSplits == 0 || numSplits < maxSplits) {
-        s.append(self[curIdx..<i])
+        s.append(String(self[curIdx..<i]))
         curIdx = self.index(after: i)
         numSplits += 1
       }
     }
 
     if curIdx != self.endIndex {
-      s.append(self[curIdx..<self.endIndex])
+      s.append(String(self[curIdx..<self.endIndex]))
     }
 
     return s
   }
-
-  #else
-
-  /**
-   * Splits a string into an array of string components.
-   *
-   * - parameter by:        The character to split on.
-   * - parameter maxSplits: The maximum number of splits to perform. If 0, all possible splits are made.
-   *
-   * - returns: An array of string components.
-   */
-  func split(by: Character, maxSplits: Int = 0) -> [String] {
-    var s = [String]()
-    var numSplits = 0
-
-    var curIdx = self.startIndex
-    for i in self.characters.indices {
-      let c = self[i]
-      if c == by && (maxSplits == 0 || numSplits < maxSplits) {
-        s.append(self[curIdx..<i])
-        curIdx = <#T##String.CharacterView corresponding to `i`##String.CharacterView#>.index(after: i)
-        numSplits += 1
-      }
-    }
-
-    if curIdx != self.endIndex {
-      s.append(self[curIdx..<self.endIndex])
-    }
-
-    return s
-  }
-
-  #endif
 
   /**
    * Pads a string to the specified width.
@@ -163,7 +118,7 @@ internal extension String {
    */
   func padded(toWidth width: Int, with padChar: Character = " ") -> String {
     var s = self
-    var currentLength = self.characters.count
+    var currentLength = self.count
 
     while currentLength < width {
       s.append(padChar)
@@ -191,7 +146,7 @@ internal extension String {
     var currentLineWidth = 0
 
     for word in self.split(by: splitBy) {
-      let wordLength = word.characters.count
+      let wordLength = word.count
 
       if currentLineWidth + wordLength + 1 > width {
         /* Word length is greater than line length, can't wrap */

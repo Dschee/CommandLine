@@ -146,7 +146,7 @@ internal class CommandLineTests: XCTestCase {
       try cli.parse()
       XCTFail("Parsed invalid int option")
     } catch let CommandLineKit.ParseError.InvalidValueForOption(opt, vals) {
-      XCTAssert(opt === e, "Incorrect option in ParseError: \(opt.longFlag)")
+      XCTAssert(opt === e, "Incorrect option in ParseError: \(String(describing: opt.longFlag))")
       XCTAssertEqual(vals, ["bad"], "Incorrect values in ParseError: \(vals)")
       XCTAssertNil(e.value, "Got non-nil value from invalid int")
     } catch {
@@ -161,7 +161,7 @@ internal class CommandLineTests: XCTestCase {
       try cli.parse()
       XCTFail("Parsed int option with no value")
     } catch let CommandLineKit.ParseError.InvalidValueForOption(opt, vals) {
-      XCTAssert(opt === f, "Incorrect option in ParseError: \(opt.longFlag)")
+      XCTAssert(opt === f, "Incorrect option in ParseError: \(String(describing: opt.longFlag))")
       XCTAssertEqual(vals, [], "Incorrect values in ParseError: \(vals)")
       XCTAssertNil(f.value, "Got non-nil value from no value int")
     } catch {
@@ -262,7 +262,7 @@ internal class CommandLineTests: XCTestCase {
       try cli.parse()
       XCTFail("Parsed invalid double option")
     } catch let CommandLineKit.ParseError.InvalidValueForOption(opt, vals) {
-      XCTAssert(opt === f, "Incorrect option in ParseError: \(opt.longFlag)")
+      XCTAssert(opt === f, "Incorrect option in ParseError: \(String(describing: opt.longFlag))")
       XCTAssertEqual(vals, ["bad"], "Incorrect values in ParseError: \(vals)")
       XCTAssertNil(f.value, "Got non-nil value from invalid double")
     } catch {
@@ -278,7 +278,7 @@ internal class CommandLineTests: XCTestCase {
       try cli.parse()
       XCTFail("Parsed double option with no value")
     } catch let CommandLineKit.ParseError.InvalidValueForOption(opt, vals) {
-      XCTAssert(opt === g, "Incorrect option in ParseError: \(opt.longFlag)")
+      XCTAssert(opt === g, "Incorrect option in ParseError: \(String(describing: opt.longFlag))")
       XCTAssertEqual(vals, [], "Incorrect values in ParseError: \(vals)")
       XCTAssertNil(g.value, "Got non-nil value from no value double")
     } catch {
@@ -349,7 +349,7 @@ internal class CommandLineTests: XCTestCase {
       try cli.parse()
       XCTFail("Parsed string option with no value")
     } catch let CommandLineKit.ParseError.InvalidValueForOption(opt, vals) {
-      XCTAssert(opt === e, "Incorrect option in ParseError: \(opt.longFlag)")
+      XCTAssert(opt === e, "Incorrect option in ParseError: \(String(describing: opt.longFlag))")
       XCTAssertEqual(vals, [], "Incorrect values in ParseError: \(vals)")
       XCTAssertNil(e.value, "Got non-nil value from no value string")
     } catch {
@@ -395,7 +395,7 @@ internal class CommandLineTests: XCTestCase {
       try cli.parse()
       XCTFail("Parsed multi string option with no value")
     } catch let CommandLineKit.ParseError.InvalidValueForOption(opt, vals) {
-      XCTAssert(opt === e, "Incorrect option in ParseError: \(opt.longFlag)")
+      XCTAssert(opt === e, "Incorrect option in ParseError: \(String(describing: opt.longFlag))")
       XCTAssertEqual(vals, [], "Incorrect values in ParseError: \(vals)")
       XCTAssertNil(e.value, "Got non-nil value from no value multistring")
     } catch {
@@ -599,16 +599,11 @@ internal class CommandLineTests: XCTestCase {
     setlocale(LC_ALL, "C")
 
     let boolOpt = BoolOption(shortFlag: "d", longFlag: "debug", helpMessage: "Enables debug mode.")
-    let counterOpt = CounterOption(shortFlag: "v", longFlag: "verbose",
-      helpMessage: "Enables verbose output. Specify multiple times for extra verbosity.")
-    let stringOpt = StringOption(shortFlag: "n", longFlag: "name", required: true,
-      helpMessage: "Name a Cy Young winner.")
-    let intOpt = IntOption(shortFlag: "f", longFlag: "favorite", required: true,
-      helpMessage: "Your favorite number.")
-    let doubleOpt = DoubleOption(shortFlag: "p", longFlag: "p-value", required: true,
-      helpMessage: "P-value for test.")
-    let extraOpt = MultiStringOption(shortFlag: "x", longFlag: "Extra", required: true,
-      helpMessage: "X is for Extra.")
+    let counterOpt = CounterOption(shortFlag: "v", longFlag: "verbose", helpMessage: "Enables verbose output. Specify multiple times for extra verbosity.")
+    let stringOpt = StringOption(shortFlag: "n", longFlag: "name", required: true, helpMessage: "Name a Cy Young winner.")
+    let intOpt = IntOption(shortFlag: "f", longFlag: "favorite", required: true, helpMessage: "Your favorite number.")
+    let doubleOpt = DoubleOption(shortFlag: "p", longFlag: "p-value", required: true, helpMessage: "P-value for test.")
+    let extraOpt = MultiStringOption(shortFlag: "x", longFlag: "Extra", required: true, helpMessage: "X is for Extra.")
 
     cli.addOptions(boolOpt, counterOpt, stringOpt, intOpt, doubleOpt, extraOpt)
 
@@ -709,11 +704,7 @@ internal class CommandLineTests: XCTestCase {
     }
 
     do {
-      #if swift(>=3.0)
-        try cli.parse(strict: true)
-      #else
-        try cli.parse(true)
-      #endif
+      try cli.parse(strict: true)
       XCTFail("Successfully parsed invalid flags in strict mode")
     } catch let CommandLineKit.ParseError.InvalidArgument(arg) {
       XCTAssertEqual(arg, "--invalid", "Incorrect argument identified in InvalidArgument: \(arg)")
@@ -753,11 +744,7 @@ internal class CommandLineTests: XCTestCase {
       o4.reset()
       cli.addOptions(o1, o2, o3, o4, o5, o6, o7)
 
-      #if swift(>=3.0)
-        try cli.parse(strict: true)
-      #else
-        try cli.parse(true)
-      #endif
+      try cli.parse(strict: true)
       XCTAssertTrue(o1.value, "Failed to set bool option with stray values")
       XCTAssertEqual(o2.value!, "green", "Incorrect value for string option with stray values")
       XCTAssertTrue(o3.value, "Failed to set combined bool option with stray values")
@@ -801,23 +788,18 @@ internal class CommandLineTests: XCTestCase {
       "-f", "45", "-p", "0.05", "-x", "extra1", "extra2", "extra3" ])
 
     let boolOpt = BoolOption(shortFlag: "d", longFlag: "debug", helpMessage: "Enables debug mode.")
-    let counterOpt = CounterOption(shortFlag: "v", longFlag: "verbose",
-      helpMessage: "Enables verbose output. Specify multiple times for extra verbosity.")
-    let stringOpt = StringOption(shortFlag: "n", longFlag: "name", required: true,
-      helpMessage: "Name a Cy Young winner.")
-    let intOpt = IntOption(shortFlag: "f", longFlag: "favorite", required: true,
-      helpMessage: "Your favorite number.")
-    let doubleOpt = DoubleOption(shortFlag: "p", longFlag: "p-value", required: true,
-      helpMessage: "P-value for test.")
-    let extraOpt = MultiStringOption(shortFlag: "x", longFlag: "Extra", required: true,
-      helpMessage: "X is for Extra.")
+    let counterOpt = CounterOption(shortFlag: "v", longFlag: "verbose", helpMessage: "Enables verbose output. Specify multiple times for extra verbosity.")
+    let stringOpt = StringOption(shortFlag: "n", longFlag: "name", required: true, helpMessage: "Name a Cy Young winner.")
+    let intOpt = IntOption(shortFlag: "f", longFlag: "favorite", required: true, helpMessage: "Your favorite number.")
+    let doubleOpt = DoubleOption(shortFlag: "p", longFlag: "p-value", required: true, helpMessage: "P-value for test.")
+    let extraOpt = MultiStringOption(shortFlag: "x", longFlag: "Extra", required: true, helpMessage: "X is for Extra.")
 
     let opts = [boolOpt, counterOpt, stringOpt, intOpt, doubleOpt, extraOpt]
     cli.addOptions(opts)
 
     var out = ""
     cli.printUsage(&out)
-    XCTAssertGreaterThan(out.characters.count, 0)
+    XCTAssertGreaterThan(out.count, 0)
 
     /* There should be at least 2 lines per option, plus the intro Usage statement */
     XCTAssertGreaterThanOrEqual(out.split(by: "\n").count, (opts.count * 2) + 1)
@@ -825,8 +807,7 @@ internal class CommandLineTests: XCTestCase {
 
   func testPrintUsageError() {
     let cli = CommandLineKit(arguments: [ "CommandLineTests" ])
-    cli.addOption(StringOption(shortFlag: "n", longFlag: "name", required: true,
-      helpMessage: "Your name"))
+    cli.addOption(StringOption(shortFlag: "n", longFlag: "name", required: true, helpMessage: "Your name"))
 
     do {
       try cli.parse()
@@ -880,16 +861,11 @@ internal class CommandLineTests: XCTestCase {
     }
 
     let boolOpt = BoolOption(shortFlag: "d", longFlag: "debug", helpMessage: "Enables debug mode.")
-    let counterOpt = CounterOption(shortFlag: "v", longFlag: "verbose",
-      helpMessage: "Enables verbose output. Specify multiple times for extra verbosity.")
-    let stringOpt = StringOption(shortFlag: "n", longFlag: "name", required: true,
-      helpMessage: "Name a Cy Young winner.")
-    let intOpt = IntOption(shortFlag: "f", longFlag: "favorite", required: true,
-      helpMessage: "Your favorite number.")
-    let doubleOpt = DoubleOption(shortFlag: "p", longFlag: "p-value", required: true,
-      helpMessage: "P-value for test.")
-    let extraOpt = MultiStringOption(shortFlag: "x", longFlag: "Extra", required: true,
-      helpMessage: "X is for Extra.")
+    let counterOpt = CounterOption(shortFlag: "v", longFlag: "verbose", helpMessage: "Enables verbose output. Specify multiple times for extra verbosity.")
+    let stringOpt = StringOption(shortFlag: "n", longFlag: "name", required: true, helpMessage: "Name a Cy Young winner.")
+    let intOpt = IntOption(shortFlag: "f", longFlag: "favorite", required: true, helpMessage: "Your favorite number.")
+    let doubleOpt = DoubleOption(shortFlag: "p", longFlag: "p-value", required: true, helpMessage: "P-value for test.")
+    let extraOpt = MultiStringOption(shortFlag: "x", longFlag: "Extra", required: true, helpMessage: "X is for Extra.")
 
     let opts = [boolOpt, counterOpt, stringOpt, intOpt, doubleOpt, extraOpt]
     cli.addOptions(opts)
@@ -905,11 +881,7 @@ internal class CommandLineTests: XCTestCase {
       XCTAssertTrue(o[0].hasPrefix("[ERROR]"))
       XCTAssertTrue(o[1].hasPrefix("[ABOUT]"))
 
-      #if swift(>=3.0)
-        let range = stride(from: 2, to: opts.count, by: 2)
-      #else
-        let range = 2.stride(to: opts.count, by: 2)
-      #endif
+      let range = stride(from: 2, to: opts.count, by: 2)
       for i in range {
         XCTAssertTrue(o[i].hasPrefix("[FLAG]"))
         XCTAssertTrue(o[i + 1].hasPrefix("[HELP]"))
