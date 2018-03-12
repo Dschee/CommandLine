@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00135F5C2056C3B100696558 /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00135F582056C3B100696558 /* StringExtensionTests.swift */; };
+		00135F5D2056C3B100696558 /* CommandLineKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00135F592056C3B100696558 /* CommandLineKitTests.swift */; };
+		00135F5F2056C3B100696558 /* LinuxMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00135F5B2056C3B100696558 /* LinuxMain.swift */; };
 		5D06884F19674D7D00BBFAAC /* CommandLineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D06884319674D7D00BBFAAC /* CommandLineKit.framework */; };
-		5D06885619674D7D00BBFAAC /* CommandLineKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D06885519674D7D00BBFAAC /* CommandLineKitTests.swift */; };
 		5D06886019674DA600BBFAAC /* CommandLineKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D06885F19674DA600BBFAAC /* CommandLineKit.swift */; };
 		5D068867196A212A00BBFAAC /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D068866196A212A00BBFAAC /* Option.swift */; };
 		5D449A18198B015E00F9A8A6 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D449A17198B015E00F9A8A6 /* StringExtensions.swift */; };
-		5D8DC809198D8BA0007CD61B /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8DC808198D8BA0007CD61B /* StringExtensionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,17 +76,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1968E1361C85926C00418122 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
+		00135F582056C3B100696558 /* StringExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionTests.swift; sourceTree = "<group>"; };
+		00135F592056C3B100696558 /* CommandLineKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLineKitTests.swift; sourceTree = "<group>"; };
+		00135F5A2056C3B100696558 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00135F5B2056C3B100696558 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 		5D06884319674D7D00BBFAAC /* CommandLineKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommandLineKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D06884719674D7D00BBFAAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D06884E19674D7D00BBFAAC /* CommandLineKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommandLineKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D06885419674D7D00BBFAAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tests/CommandLineKitTests/Info.plist; sourceTree = SOURCE_ROOT; };
-		5D06885519674D7D00BBFAAC /* CommandLineKitTests.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; name = CommandLineKitTests.swift; path = Tests/CommandLineKitTests/CommandLineKitTests.swift; sourceTree = SOURCE_ROOT; tabWidth = 2; usesTabs = 0; };
 		5D06885F19674DA600BBFAAC /* CommandLineKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CommandLineKit.swift; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		5D068866196A212A00BBFAAC /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		5D449A17198B015E00F9A8A6 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		5D449B63198B412E00F9A8A6 /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
-		5D8DC808198D8BA0007CD61B /* StringExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; name = StringExtensionTests.swift; path = Tests/CommandLineKitTests/StringExtensionTests.swift; sourceTree = SOURCE_ROOT; tabWidth = 2; usesTabs = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,11 +108,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00135F572056C3B100696558 /* CommandLineKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				00135F582056C3B100696558 /* StringExtensionTests.swift */,
+				00135F592056C3B100696558 /* CommandLineKitTests.swift */,
+			);
+			path = CommandLineKitTests;
+			sourceTree = "<group>";
+		};
+		00135F602056C3BF00696558 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				00135F5A2056C3B100696558 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		1968E1351C85922A00418122 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				1968E1361C85926C00418122 /* LinuxMain.swift */,
-				5D06885219674D7D00BBFAAC /* CommandLineKitTests */,
+				00135F572056C3B100696558 /* CommandLineKitTests */,
+				00135F5B2056C3B100696558 /* LinuxMain.swift */,
+				00135F602056C3BF00696558 /* Supporting Files */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -150,25 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				5D06884719674D7D00BBFAAC /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		5D06885219674D7D00BBFAAC /* CommandLineKitTests */ = {
-			isa = PBXGroup;
-			children = (
-				5D06885519674D7D00BBFAAC /* CommandLineKitTests.swift */,
-				5D8DC808198D8BA0007CD61B /* StringExtensionTests.swift */,
-				5D06885319674D7D00BBFAAC /* Supporting Files */,
-			);
-			name = CommandLineKitTests;
-			path = Tests/CommandLineKitTests;
-			sourceTree = "<group>";
-		};
-		5D06885319674D7D00BBFAAC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				5D06885419674D7D00BBFAAC /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -245,7 +245,7 @@
 					};
 					5D06884D19674D7D00BBFAAC = {
 						CreatedOnToolsVersion = 6.0;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0920;
 						TestTargetID = 5D06884219674D7D00BBFAAC;
 					};
 				};
@@ -300,8 +300,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D06885619674D7D00BBFAAC /* CommandLineKitTests.swift in Sources */,
-				5D8DC809198D8BA0007CD61B /* StringExtensionTests.swift in Sources */,
+				00135F5F2056C3B100696558 /* LinuxMain.swift in Sources */,
+				00135F5D2056C3B100696558 /* CommandLineKitTests.swift in Sources */,
+				00135F5C2056C3B100696558 /* StringExtensionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +485,7 @@
 		5D06885D19674D7D00BBFAAC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -498,6 +500,7 @@
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.jatoben.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -505,6 +508,7 @@
 		5D06885E19674D7D00BBFAAC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
